@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<package name="global" extends="struts-default">
+
+		<action name="*_to*" class="com.assistant.action.{1}Action" method="to{2}">
+			<result name="success">/as_{1}/{2}.jsp</result>
+		</action>
+		<action name="*_*" class="com.assistant.action.{1}Action" method="{2}">
+			<result name="success">/as_{1}/{2}.jsp</result>
+			<result type="chain" name="input">{1}_to{2}</result>
+			<result type="chain" name="tomain">{1}_main</result>
+			<result type="chain" name="touser">User_main</result><!-- 个人主页 -->
+			<result type="chain" name="todietian">Dietian_main</result><!-- 营养师主页 -->
+		</action>
+
+		<!-- 进入主页相关
+		<action name="index" class="com.assistant.action.CommenAction">
+			<result name="indexpage">/as-commen/index.jsp</result>
+			<result name="mainpage">/as-commen/main.jsp</result>
+		</action>
+		<action name="tomain" class="com.assistant.action.CommenAction" method="main">
+			<result name="mainpage">/as-commen/main.jsp</result>
+		</action> -->
+
+		<!-- 用户/游客操作相关
+		<action name="commen" class="com.assistant.action.CommenAction">
+			<result name="todishpage">/as-commen/dishdetail.jsp</result>
+			<result name="tofoodpage">/as-commen/fooddetail.jsp</result>
+			<result name="changshilist">/as-commen/changshilist.jsp</result>
+			<result name="taboodetail">/as-commen/taboodetail.jsp</result>
+			<result name="sousuojieguo">/as-commen/sousuo_list.jsp</result>
+			<result name="artcle">/as-commen/article.jsp</result>
+			<result name="artcldetail">/as-commen/article.jsp</result>
+			<result name="zhiliaolist">/as-commen/shiwuzl.jsp</result>
+			<result name="zhiliaodetail">/as-commen/zhiliaodetail.jsp</result>
+			<result name="tuijian">/as-commen/tesetj.jsp</result>
+			<result name="liuyan" type="chain">tomain</result>
+			<result name="message">/aaa_test/chat_window/main.jsp</result>
+			<result name="input_message">/aaa_test/chat_window/main.jsp</result>
+			<result name="u_send">/aaa_test/chat_window/user.jsp</result>
+			<result name="d_send">/aaa_test/chat_window/dietian.jsp</result>
+			<result name="">/as-commen/error.jsp</result>
+			<result name="reload">/aaa_test/chat_window/main.jsp</result>
+			<result name="stay">/aaa_test/chat_window/main.jsp</result>
+			
+		</action> -->
+
+		<!-- 用户动作
+		<action name="user" class="com.assistant.action.UserAction">
+			<result name="modifypwd_success">/as-users/main.jsp</result>
+			<result name="modifypwd_input">/as-users/modifypwd.jsp</result>
+			<result name="kouwei">/as-users/kouweitc.jsp</result>
+			<result name="dietian">/as-users/yingys.jsp</result>
+			<result name="error">/as-users/error.jsp</result>
+			<result name="tocompleteinfo">/as-users/completeinfo.jsp</result>
+			<result type="chain" name="completeinfo">touser</result>
+			<result type="chain" name="completeinfo_input">tocompleteinfo</result>
+			<result name="message">/aaa_test/chat_window/d_main.jsp</result>
+		</action> -->
+		
+		<!-- <action name="dietian" class="com.assistant.action.DietianAction">
+			<result name="message">/aaa_test/chat_window/d_main.jsp</result>
+		</action> -->
+
+		<!-- 用户登录相关
+		<action name="login" class="com.assistant.action.LoginAction">
+			<result name="input">/as-commen/login.jsp</result>
+			<result type="chain" name="user">touser</result>
+			<result type="chain" name="dietian">todietian</result>
+			<result name="logout_success">/as-commen/main.jsp</result>
+		</action>
+		<action name="logout" class="com.assistant.action.LoginAction" method="logout">
+			<result name="logout_success">/as-commen/main.jsp</result>
+			<result name="input">/as-commen/index.jsp</result>
+		</action> -->
+
+		<!-- 用户注册相关 -->
+		<!-- <action name="register" class="com.assistant.action.RegisterAction">
+			<result name="input">/as-commen/register.jsp</result>
+			<result name="success" type="chain">touser</result>个人主页
+		</action> -->
+
+		<!-- 跳转至用户主页 -->
+		<!-- <action name="touser" class="com.assistant.action.DirectToUserAction">
+			<result name="tomain">/as-users/main.jsp</result>
+		</action> -->
+
+		<!-- 跳转至营养师主页 -->
+		<!-- <action name="todietian" class="com.assistant.action.DirectToDietianAction">
+			<result name="tomain">/as-dietian/main.jsp</result>
+		</action> -->
+
+	</package>
+	<include file="/com/assistant/action/admin/admin.xml"></include>
+
+	<package name="jFreeChartDemonstration" extends="struts-default"
+		namespace="/jfreechart">
+		<result-types>
+			<result-type name="chart"
+				class="org.apache.struts2.dispatcher.ChartResult"></result-type>
+		</result-types>
+		<action name="JFreeChartAction" class="com.assistant.action.jfc.JFreeChartAction">
+			<result name="draw" type="chart">
+				<param name="width">600</param>
+				<param name="height">300</param>
+			</result>
+		</action>
+	</package>
+	
+	<!-- 生成图表，格式：jfc/方法    调用userAction里的方法      -->
+	<package name="jfreechart" extends="struts-default">
+		<result-types>
+			<result-type name="chart" class="org.apache.struts2.dispatcher.ChartResult"></result-type>
+		</result-types>
+		<action name="jfc" class="com.assistant.action.UserAction">
+			<result name="draw" type="chart">
+				<param name="width">600</param>
+				<param name="height">300</param>
+			</result>
+		</action>
+	</package>
+
+</struts>
+	

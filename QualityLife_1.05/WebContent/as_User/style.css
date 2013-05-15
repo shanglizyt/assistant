@@ -1,0 +1,14 @@
+#taocan1 {
+	float: left;
+	height: 160px;
+	width: 140px;
+	vertical-align: top;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
+#taocan1 #taocan-img {
+	height: 140px;
+	width: 140px;
+}

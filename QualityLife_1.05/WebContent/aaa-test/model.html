@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript">
+ 
+function SetCookie(name,value)//两个参数，一个是cookie的名子，一个是值
+{ 
+ 	var Days = 30;
+ 	var exp = new Date(); //new Date("December 31, 9998");
+ 	exp.setTime(exp.getTime() + Days*24*60*60*1000); //此 cookie 将被保存 30 天
+ 	if (document.cookie == "") { 
+ 		document.cookie = name + "="+ escape (value)+ ";expires=" + exp.toGMTString();
+ 	}
+ 	else{
+ 		var temp = document.cookie.split(";");
+ 		name = name + temp.length;
+	 	temp3 =  name + "="+ escape (value)+ ";expires=" + exp.toGMTString()+";";
+	 	document.cookie = temp3;
+ 	}
+}
+
+//删除cookie
+function delCookie(name)
+{
+	var exp = new Date();
+ 	exp.setTime(exp.getTime() - 1);
+ 	var cval=getCookie(name);
+ 	if(cval!=null) document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+} 
+
+function showCookie(name)
+{
+	if (document.cookie == "") { 
+		　　document.write("There are no cookies here") 
+	} 
+	else { 
+　　	var thisCookie = document.cookie;
+	document.write(thisCookie);
+　　} 
+	
+}
+</script>
+</head>
+<body>
+	<input type="button" onclick="SetCookie('my','www')" value="1" />
+	<input type="button" onclick="SetCookie('my','baidu')" value="2" />
+	<input type="button" onclick="SetCookie('my','com')" value="3" />
+	<input type="button" onclick="showCookie('my')" value="4" />
+</body>
+</html>
